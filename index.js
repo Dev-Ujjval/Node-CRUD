@@ -1,9 +1,11 @@
 
-var express = require('express');
-var app = express();
-var cors  = require('cors')
-var bodyParser = require('body-parser');
-var routes = require('./app/routes/index');
+var express = require('express'),
+    app = express(),
+    cors  = require('cors'),
+    bodyParser = require('body-parser'),
+    swaggerUi = require('swagger-ui-express'),
+    routes = require('./app/routes/index'),
+    swaggerDocument = require('./swagger.json');
 
 require('dotenv').config();
 require('./config/database').db;
@@ -21,6 +23,9 @@ const baseUrl = `/new_api/v1`;
 
 // mount all routes on /api path
 app.use(`${baseUrl}`, routes);
+
+// Swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Create a Server
 app.listen(process.env.PORT, () =>

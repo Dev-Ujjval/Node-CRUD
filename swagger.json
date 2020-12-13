@@ -1,0 +1,188 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "My Sample Project CRUD",
+        "description": "My Sample Project Application API",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:4000/new_api/v1",
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/student": {
+            "get": {
+                "tags": [
+                    "Get All Student"
+                ],
+                "summary": "Get all students in system",
+                "description": "Get all students in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/GetAllStudents"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Add New Student"
+                ],
+                "summary": "Create new student in system",
+                "description": "Create new student in system",
+                "parameters": [
+                    {
+                        "name": "student",
+                        "in": "body",
+                        "description": "Student that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/AddUpdateStudent"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New student is created",
+                        "schema": {
+                            "$ref": "#/definitions/GetAllStudents"
+                        }
+                    }
+                }
+            }
+        },
+        "/student/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of student that we want to find",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "summary": "Get student with given ID",
+                "tags": [
+                    "Get Existing Student"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Student is ...",
+                        "schema": {
+                            "$ref": "#/definitions/GetAllStudents"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete student with given ID",
+                "tags": [
+                    "Delete Student"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Student is deleted",
+                        "schema": {
+                            "$ref": "#/definitions/GetAllStudents"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update student with given ID",
+                "tags": [
+                    "Update Existing Student"
+                ],
+                "parameters": [
+                    {
+                        "name": "student",
+                        "in": "body",
+                        "description": "Student with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/AddUpdateStudent"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Student is updated",
+                        "schema": {
+                            "$ref": "#/definitions/UpdateResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "GetAllStudents": {
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "__v": {
+                    "type": "number"
+                }
+            }
+        },
+        "AddUpdateStudent": {
+            "required": [
+                "name",
+                "number",
+                "email"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "value": "Test name"
+                },
+                "number": {
+                    "type": "string",
+                    "value": "1234567890"
+                },
+                "email": {
+                    "type": "string",
+                    "value": "test@gmail.com"
+                }
+            }
+        },
+        "UpdateResponse": {
+            "properties": {
+                "n": "number",
+                "nModified": "number",
+                "ok": "number"
+            }
+        }
+    }
+}
